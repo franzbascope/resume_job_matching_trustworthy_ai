@@ -3,7 +3,6 @@ from llama_cpp import Llama
 import os
 from langchain_ollama import OllamaLLM
 
-
 def improve_prompt(text):
     """Create a more effective prompt that will get better tagging results."""
     improved_prompt = f"""
