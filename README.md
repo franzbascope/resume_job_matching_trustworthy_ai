@@ -12,7 +12,7 @@ This project uses semantic similarity to match resumes with relevant job descrip
 ## 📂 Project Structure
 ```
 resume_job_matching_trustworthy_ai/
-│── creating_job_resume_pairs.ipynb  # Prepares training data (positive resume-job pairs)
+│── creating_job_resume_pairs.ipynb   # Prepares training data (positive resume-job pairs)
 │── llama_8b_test.py                  # Initial test using LLaMA for resume tagging
 │── resume_job_matching.ipynb         # Main notebook for model training and evaluation
 │── README.md                         # Project documentation
