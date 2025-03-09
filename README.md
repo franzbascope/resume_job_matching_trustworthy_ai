@@ -19,23 +19,23 @@ resume_job_matching_trustworthy_ai/
 ```
 
 ## Setup & Installation
-### **1 Clone the Repository**
+### **1. Clone the Repository**
 ```bash
 git clone https://github.com/franzbascope/resume_job_matching_trustworthy_ai.git
 cd resume_job_matching_trustworthy_ai
 ```
 
-### **2 Install Dependencies**
+### **2. Install Dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-### **3 Run Model Training (Optional, If Fine-Tuning Again)**
+### **3. Run Model Training (Optional, If Fine-Tuning Again)**
 ```bash
 python resume_job_matching.ipynb
 ```
 
-### **4 Run API for Job Matching**
+### **4. Run API for Job Matching**
 ```bash
 cd api
 python app.py
