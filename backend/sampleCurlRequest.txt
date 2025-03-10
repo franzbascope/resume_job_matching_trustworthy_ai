@@ -1,0 +1,3 @@
+curl --location 'http://127.0.0.1:5000/match' \
+--form 'resume=@"/Users/julianaelrayes/Downloads/example.pdf"' \
+--form 'job_listings=@"/Users/julianaelrayes/Downloads/example.pdf"'
