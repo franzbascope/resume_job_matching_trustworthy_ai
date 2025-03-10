@@ -3,27 +3,17 @@
 <table class="table mt-3">
   <thead>
     <tr>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Job listing</th>
+      <th scope="col">Score</th>
     </tr>
   </thead>
   <tbody>
+  {% for result in results %}
     <tr>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td>{{ result.file_name }}</td>
+      <td class="{% if result.score > 80 %}success{% endif %}">{{ result.score }}</td>
     </tr>
-    <tr>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <td >Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@fat</td>
-    </tr>
+  {% endfor %}
   </tbody>
 </table>
 {% endblock %}

@@ -33,7 +33,7 @@ def upload_resume():
     """Handle file uploads."""
     # Handle resume upload
     resume = request.files.get("resume")
-    job_files = request.files.getlist("jobs")  # Get multiple job listings
+    job_files = request.files.getlist("job_files")  # Get multiple job listings
 
     # Validate resume
     if not resume or not allowed_file(resume.filename):
@@ -46,11 +46,16 @@ def upload_resume():
         return redirect(url_for("upload"))
 
     resume_text = extract_text_from_pdf(resume)
-    job_listings_texts = [extract_text_from_pdf(
-        job_file) for job_file in job_files]
+    job_listings_texts = []
+    for job_file in job_files:
+        job_text = extract_text_from_pdf(job_file)
+        job_listings_texts.append({
+            "fileName": job_file.filename,
+            "content": job_text
+        })
     scores = [calculate_similarity(resume_text, job_text)
               for job_text in job_listings_texts]
-    session['results'] = scores
+    session['resume_results'] = scores
     return redirect(url_for('results'))
 
 
@@ -74,8 +79,13 @@ def match_resume():
         return jsonify({"error": "Job listings files are empty"}), 400
 
     resume_text = extract_text_from_pdf(resume_file)
-    job_listings_texts = [extract_text_from_pdf(
-        job_file) for job_file in job_listings_files]
+    job_listings_texts = []
+    for job_file in job_listings_files:
+        job_text = extract_text_from_pdf(job_file)
+        job_listings_texts.append({
+            "fileName": job_file.filename,
+            "content": job_text
+        })
 
     # Here you would implement your matching logic
     # For demonstration, let's assume we have a function `calculate_similarity`
@@ -94,12 +104,11 @@ def extract_text_from_pdf(pdf_file):
     return text
 
 
-def calculate_similarity(resume_text, job_text):
-    short_job_text = job_text[:20]
+def calculate_similarity(resume_text, job_dic):
     # generate a random number with 2 decimals from 0 to 100
     rand = round(random.uniform(0, 100), 2)
     return {
-        "job_title": short_job_text,
+        "file_name": job_dic["fileName"],
         "score": rand
     }
 
