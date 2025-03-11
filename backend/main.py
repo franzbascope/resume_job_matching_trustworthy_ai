@@ -53,6 +53,8 @@ def upload():
 @app.route('/results', methods=['GET'])
 def results():
     results = session.get('resume_results')
+    # Do not store past results
+    session['resume_results'] = []
     return render_template('results.html', results=results)
 
 
