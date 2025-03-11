@@ -3,13 +3,13 @@
     <form action="{{ url_for('upload_resume') }}" method="post" enctype="multipart/form-data" id="resumeForm">
         <div class="mb-3">
           <label for="inputResume" class="form-label">Upload your resume</label>
-          <input type="file" class="form-control" id="inputResume" name="resume" accept=".pdf" required>
+          <input id="inputResume"  type="file" class="form-control" id="inputResume" name="resume" accept=".pdf" required>
         </div>
         <!-- <div class="mb-3">
           <label for="jobListingsInput" class="form-label">Match with database or upload job listings</label>
           <input type="file" class="form-control" id="jobListingsInput" accept=".pdf" name="job_files" multiple>
         </div> -->
-        <button type="submit" class="btn btn-primary">Match jobs</button>
+        <button  id="submitButton" type="submit" class="btn btn-primary">Match jobs</button>
       </form>
 </div>
 <script>
