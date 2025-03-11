@@ -73,5 +73,11 @@ Once the server is running, open your browser and go to:
 http://127.0.0.1:5000
 ```
 
+### 9. Opitional
+For higher accuracy , comparison with more job listings,
+increase n in main.py line 38 ```job_df = job_df.sample(n=200, random_state=42)```
+could be increased up to 50.000 to be compared with a higher number of job listings,
+this would affect performance
+
 The application should load successfully, allowing you to upload a resume and receive job matches.
 
