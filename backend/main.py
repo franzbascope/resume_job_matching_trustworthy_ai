@@ -35,7 +35,7 @@ def initialize():
     tokenizer = AutoTokenizer.from_pretrained('../final_model/tokenizer/')
 
     job_df = pd.read_csv('./1/job_descriptions.csv')
-    job_df = job_df.sample(n=5000, random_state=42)
+    job_df = job_df.sample(n=200, random_state=42)
     return model, tokenizer, job_df
    
 model, tokenizer, job_df = initialize()
