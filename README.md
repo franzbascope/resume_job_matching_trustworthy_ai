@@ -75,12 +75,3 @@ http://127.0.0.1:5000
 
 The application should load successfully, allowing you to upload a resume and receive job matches.
 
-## Notes
-- Ensure you are using the correct Python version (recommended: Python 3.8 or later).
-- If you encounter missing dependencies, try running `pip install -r ./backend/requirements.txt` again.
-- If Git LFS files fail to download, verify the installation using `git lfs install --force` and reattempt `git lfs pull`.
-
----
-
-This setup ensures a smooth and reproducible environment for running the Job Matching System.
-
