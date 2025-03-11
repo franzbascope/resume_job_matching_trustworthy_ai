@@ -28,13 +28,13 @@ model_config = {
 def initialize():
     model = ContrastiveModel(model_config['model_name'])
 
-    model_path = '/home/gv/school/trustworthy_ai/proj/resume_job_matching_trustworthy_ai/final_model/final_model.pt'
+    model_path = '../final_model/final_model.pt'
     model.load_state_dict(torch.load(model_path, map_location=model_config['device']))
     model.to(model_config['device'])
 
-    tokenizer = AutoTokenizer.from_pretrained('/home/gv/school/trustworthy_ai/proj/resume_job_matching_trustworthy_ai/final_model/tokenizer/')
+    tokenizer = AutoTokenizer.from_pretrained('../final_model/tokenizer/')
 
-    job_df = pd.read_csv('/home/gv/school/trustworthy_ai/proj/job_data/job_descriptions.csv')
+    job_df = pd.read_csv('./1/job_descriptions.csv')
     job_df = job_df.sample(n=50000, random_state=42)
     return model, tokenizer, job_df
    
