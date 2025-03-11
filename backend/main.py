@@ -1,11 +1,8 @@
 from flask import Flask, request, jsonify, flash, redirect, url_for, session
 import torch
 from flask import render_template
-import fitz  # PyMuPDF
+import fitz  
 import logging
-import random
-import os
-import sys
 import pandas as pd
 from transformers import AutoTokenizer
 from scipy.spatial.distance import cosine
@@ -38,7 +35,7 @@ def initialize():
     tokenizer = AutoTokenizer.from_pretrained('/home/gv/school/trustworthy_ai/proj/resume_job_matching_trustworthy_ai/final_model/tokenizer/')
 
     job_df = pd.read_csv('/home/gv/school/trustworthy_ai/proj/job_data/job_descriptions.csv')
-
+    job_df = job_df.sample(n=50000, random_state=42)
     return model, tokenizer, job_df
    
 model, tokenizer, job_df = initialize()
@@ -69,18 +66,12 @@ def upload_resume():
     """Handle file uploads."""
     # Handle resume upload
     resume = request.files.get("resume")
-    job_files = request.files.getlist("job_files")  # Get multiple job listings
-
+    
     # Validate resume
     if not resume or not allowed_file(resume.filename):
         flash("Invalid resume file! Only PDFs are allowed.", "danger")
         return redirect(url_for("upload"))
-
-    # Validate job listings
-    if not job_files or any(not allowed_file(job.filename) for job in job_files):
-        flash("Invalid job listing files! Only PDFs are allowed.", "danger")
-        return redirect(url_for("upload"))
-
+    
     try:
         resume_text = extract_text_from_pdf(resume)
         
@@ -97,7 +88,6 @@ def upload_resume():
         app.logger.error(f"Error processing request: {str(e)}")
         flash(f"Error processing files: {str(e)}", "danger")
         return redirect(url_for("upload"))
-
 
 @app.route("/match", methods=["POST"])
 def match_resume():
@@ -133,6 +123,7 @@ def match_resume():
 
 def recommend_jobs(resume_text, job_df, model, tokenizer, config, top_n=5):
     resume_embedding = get_resume_embedding(resume_text, model, tokenizer, config) 
+    resume_embedding = resume_embedding.flatten()
     similarities = []
 
     batch_size = 100
@@ -147,7 +138,7 @@ def recommend_jobs(resume_text, job_df, model, tokenizer, config, top_n=5):
             job_text = f"{job_title}. {job_desc}"
 
             job_embedding = get_job_embedding(job_text, model, tokenizer, config)
-
+            job_embedding = job_embedding.flatten()
             #cosine similarity
             similarity = 1 - cosine(resume_embedding, job_embedding)
 
