@@ -1,55 +1,86 @@
-# AI-Powered Resume-to-Job Matching
+# Job Matching System
 
-## Project Overview
-This project uses semantic similarity to match resumes with relevant job descriptions. We fine-tune SBERT (Sentence-BERT) and leverage pre-trained embeddings to improve job matching accuracy. The goal is to create an AI system that enhances hiring efficiency by finding the best-fit jobs for candidates based on their skills and experience.
+This project is a Flask-based application that allows users to upload a resume and receive the best-matching job listings based on NLP-based job matching.
 
-## Features
-- **Resume and Job Description Matching:** Uses natural language processing (NLP) techniques to assess compatibility.
-- **Fair and Explainable AI:** Implements techniques to ensure recommendations are interpretable and free from bias.
-- **Web Scraping for Job Listings:** Automates job posting retrieval for a more comprehensive dataset.
-- **Fine-Tuned AI Models:** Utilizes machine learning to enhance accuracy in job matching.
-- **User-Friendly API:** Provides endpoints for easy integration with external applications.
+## Setup Instructions
 
-## Project Structure
-```
-resume_job_matching_trustworthy_ai/
-│── backend/
-│── dataset/
-│── final_model/
-│── job_web_scraping/
-│── jupyter_notebooks/
-│── samples/
-│── .gitattributes
-│── .gitignore
-│── README.md
+Follow these steps to set up and run the project:
+
+### 1. Create a Virtual Environment
+To ensure dependency isolation, create a virtual environment:
+```sh
+python -m venv venv
 ```
 
-## Prerequisites
-- Python 3.8+
-- pip
-- Virtual environment (optional)
-  
-## Setup & Installation
+### 2. Activate the Virtual Environment
+Activate the virtual environment depending on your operating system:
+- **Windows**:
+  ```sh
+  venv\Scripts\activate
+  ```
+- **MacOS/Linux**:
+  ```sh
+  source venv/bin/activate
+  ```
 
-### **1. Clone the Repository**
-```bash
-git clone https://github.com/franzbascope/resume_job_matching_trustworthy_ai.git
-cd resume_job_matching_trustworthy_ai
+### 3. Install Dependencies
+With the virtual environment activated, install the required dependencies:
+```sh
+pip install -r ./backend/requirements.txt
 ```
 
-### **2. Create and activate a virtual environment**
-```bash
-python3 -m venv env
-source env/bin/activate  # On Windows, use 'env\Scripts\activate'
+### 4. Install Git Large File Storage (LFS)
+This project requires Git LFS to manage large files. Install it using:
+- **Windows**:
+  ```sh
+  choco install git-lfs
+  ```
+- **MacOS**:
+  ```sh
+  brew install git-lfs
+  ```
+- **Linux**:
+  ```sh
+  sudo apt install git-lfs  # Debian/Ubuntu
+  sudo dnf install git-lfs  # Fedora
+  ```
+After installation, enable Git LFS:
+```sh
+git lfs install
 ```
 
-### **3. Install the required dependencies**
-```bash
-pip install -r requirements.txt
+### 5. Pull Large Files from Git LFS
+Ensure large files are retrieved by running:
+```sh
+git lfs pull
 ```
 
-## How to Use
-1. Upload a Resume
-2. Run Matching Algorithm
-3. Review Results
+### 6. Initialize the Backend (Run Once)
+Before starting the server for the first time, initialize the backend by executing:
+```sh
+python backend/init.py
+```
+
+### 7. Start the Server
+Run the following command to start the Flask server:
+```sh
+python backend/main.py
+```
+
+### 8. Access the Application
+Once the server is running, open your browser and go to:
+```
+http://127.0.0.1:5000
+```
+
+The application should load successfully, allowing you to upload a resume and receive job matches.
+
+## Notes
+- Ensure you are using the correct Python version (recommended: Python 3.8 or later).
+- If you encounter missing dependencies, try running `pip install -r ./backend/requirements.txt` again.
+- If Git LFS files fail to download, verify the installation using `git lfs install --force` and reattempt `git lfs pull`.
+
+---
+
+This setup ensures a smooth and reproducible environment for running the Job Matching System.
 
